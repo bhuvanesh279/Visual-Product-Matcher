@@ -8,10 +8,22 @@ Note : Due to GitHub’s upload size limits, only a few sample images are includ
 The full dataset can be accessed from the Kaggle link above.
 
 ## Features
-- Upload a product image and find top 5 visually similar products.
-- Supports multiple categories (e.g., watches, shoes, laptops, headphones).
-- Works directly with a dataset stored in Google Drive.
+-Upload an image of a product.
+-Find top visually similar products from the dataset.
+-Display similarity scores and images dynamically.
+-Lightweight and fast feature extraction using deep learning.
 
+## Technology Stack
+-Frontend: Streamlit (Python-based web interface)
+-Backend / Feature Extraction: TensorFlow and Keras
+-Model: Pretrained ResNet50 (ImageNet weights) for feature embeddings
+
+# Model Details
+-Architecture: ResNet50, pretrained on ImageNet
+-Input Size: 224 × 224 pixels RGB images
+-Feature Extraction: Global average pooling applied to the output of the last convolutional layer
+-Output Feature Vector: 2048-dimensional vector for each image
+-Similarity Calculation: Cosine similarity between feature vectors
 ## Results
 
 **Query Image:**  
@@ -24,7 +36,9 @@ The full dataset can be accessed from the Kaggle link above.
 "# Visual-Product-Matcher"
 
 ## Live Demo
-Check out the live app here: https://visual-appuct-matcher-b3nj2ccf32kcnzgjpvmvuy.streamlit.app/
+Check out the live app here: visual-matcher-bhuvaneshwaran-24mca0085.streamlit.app
+
+
 
 
 
