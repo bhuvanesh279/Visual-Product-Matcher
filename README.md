@@ -4,7 +4,7 @@ This is a **Streamlit-based web application** to search for similar products usi
 The app extracts features from product images using **ResNet50** and compares them via **cosine similarity**.
 
 **Dataset Source:** [Kaggle - Images for Watches, Shoes, Headsets, Laptops](https://www.kaggle.com/datasets/cliffordlee96/images-for-watches-shoes-headsets-laptops)  
-Due to GitHub’s upload size limits, only a few sample images are included in this repository.  
+Note : Due to GitHub’s upload size limits, only a few sample images are included in this repository.  
 The full dataset can be accessed from the Kaggle link above.
 
 ## Features
@@ -22,4 +22,5 @@ The full dataset can be accessed from the Kaggle link above.
 2. sneakers 212 (sneakers) - Score: 0.617 ![sneaker2]
 3. sneakers 235 (sneakers) - Score: 0.612 ![sneaker3]
 "# Visual-Product-Matcher" 
+
 
