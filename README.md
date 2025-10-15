@@ -15,10 +15,11 @@ The full dataset can be accessed from the Kaggle link above.
 ## Results
 
 **Query Image:**  
-![query](images/query.jpg)
+![query].
 
 **Top Similar Products:**
-1. sneakers 265 (sneakers) - Score: 0.621 ![sneaker1](images/sneaker1.jpg)
-2. sneakers 212 (sneakers) - Score: 0.617 ![sneaker2](images/sneaker2.jpg)
-3. sneakers 235 (sneakers) - Score: 0.612 ![sneaker3](images/sneaker3.jpg)
+1. sneakers 265 (sneakers) - Score: 0.621 ![sneaker1]
+2. sneakers 212 (sneakers) - Score: 0.617 ![sneaker2]
+3. sneakers 235 (sneakers) - Score: 0.612 ![sneaker3]
 "# Visual-Product-Matcher" 
+
