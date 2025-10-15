@@ -36,7 +36,8 @@ The full dataset can be accessed from the Kaggle link above.
 "# Visual-Product-Matcher"
 
 ## Live Demo
-Check out the live app here: visual-matcher-bhuvaneshwaran-24mca0085.streamlit.app
+Check out the live app here: [https :visual-matcher-bhuvaneshwaran-24mca0085.streamlit.app](https://visual-matcher-bhuvaneshwaran-24mca0085.streamlit.app/)
+
 
 
 
