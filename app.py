@@ -1,5 +1,5 @@
 import streamlit as st
-import os, numpy as np
+import pickle, os, numpy as np
 from PIL import Image
 from sklearn.metrics.pairwise import cosine_similarity
 from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
@@ -10,13 +10,14 @@ st.title("🖼️ Visual Product Matcher")
 
 # === Folder containing sample images ===
 base_path = os.path.join(os.path.dirname(__file__), "sample_images")
+features_path = "features.pkl"
 
 # === Validate folder ===
 if not os.path.exists(base_path):
     st.error("❌ 'sample_images' folder not found in repository.")
     st.stop()
 
-# === Load sample images ===
+# === Load products (flat folder) ===
 products = []
 for idx, img_file in enumerate(os.listdir(base_path), start=1):
     if img_file.lower().endswith(('.jpg', '.jpeg', '.png')):
@@ -32,13 +33,16 @@ if len(products) == 0:
 
 st.write(f"✅ Total products loaded: {len(products)}")
 
-# === Load model ===
-@st.cache_resource
-def load_model():
-    base_model = ResNet50(weights='imagenet', include_top=False, pooling='avg')
-    return Model(inputs=base_model.input, outputs=base_model.output)
+# === Load precomputed features ===
+if not os.path.exists(features_path):
+    st.warning("⚠️ features.pkl not found — using model to compute features on the fly.")
+    product_features = None
+else:
+    product_features = pickle.load(open(features_path, "rb"))
 
-model = load_model()
+# === Model setup ===
+base_model = ResNet50(weights='imagenet', include_top=False, pooling='avg')
+model = Model(inputs=base_model.input, outputs=base_model.output)
 
 def extract_features(img_path):
     img = Image.open(img_path).convert('RGB').resize((224,224))
@@ -48,16 +52,6 @@ def extract_features(img_path):
     features = model.predict(x, verbose=0)
     return features.flatten()
 
-# === Precompute all product features ===
-@st.cache_data
-def compute_dataset_features():
-    feats = []
-    for p in products:
-        feats.append(extract_features(p["image_path"]))
-    return np.array(feats)
-
-product_features = compute_dataset_features()
-
 # === Upload and Search ===
 uploaded_file = st.file_uploader("📤 Upload a product image", type=['jpg','jpeg','png'])
 
@@ -66,11 +60,15 @@ if uploaded_file is not None:
     st.image(query_img, caption="Query Image", use_container_width=True)
 
     query_features = extract_features(uploaded_file).reshape(1, -1)
+
+    # Compute similarities dynamically if precomputed features unavailable
+    if product_features is None:
+        product_features = np.array([extract_features(p["image_path"]) for p in products])
+
     similarities = cosine_similarity(query_features, product_features)[0]
     sorted_idx = np.argsort(similarities)[::-1]
 
     st.subheader("🔍 Top Similar Products")
     for idx in sorted_idx[:5]:
         p = products[idx]
-        st.image(Image.open(p["image_path"]).resize((200,200)), 
-                 caption=f"{p['name']} — Similarity: {similarities[idx]:.3f}")
+        st.image(Image.open(p["image_path"]).resize((200,200)), caption=f"{p['name']} (Score: {similarities[idx]:.3f})")
