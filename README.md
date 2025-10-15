@@ -21,6 +21,10 @@ The full dataset can be accessed from the Kaggle link above.
 1. sneakers 265 (sneakers) - Score: 0.621 ![sneaker1]
 2. sneakers 212 (sneakers) - Score: 0.617 ![sneaker2]
 3. sneakers 235 (sneakers) - Score: 0.612 ![sneaker3]
-"# Visual-Product-Matcher" 
+"# Visual-Product-Matcher"
+
+## Live Demo
+Check out the live app here: https://visual-appuct-matcher-b3nj2ccf32kcnzgjpvmvuy.streamlit.app/
+
 
 
